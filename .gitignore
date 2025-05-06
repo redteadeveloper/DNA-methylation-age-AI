@@ -125,3 +125,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+*.docx
+*.pdf
+*.txt
+*.json
+
+GSE40279/
+GSE72775/
+
+json/
