@@ -1,6 +1,5 @@
 const fs = require('fs')
 const brain = require('brain.js')
-const SpearmanRHO = require('spearman-rho')
 const beta = JSON.parse(fs.readFileSync('./data.json', 'utf8'))['cg00000029']
 const sampleAge = JSON.parse(fs.readFileSync('../json/GSE40279_samples.json'), 'utf8').map(n => parseInt(n[0]))
 
@@ -18,14 +17,9 @@ for (var x in beta) {
     data.push({input: [beta[x]], output: [sampleAge[x]/100]})
 }
 
-// const net = new brain.NeuralNetwork(config)
-// net.train(data)
+const net = new brain.NeuralNetwork(config)
+net.train(data)
 
-// let output = net.run([0.5])
+let output = net.run([0.5])
 
-// console.log(Math.round(output[0]*100))
-
-const spearmanRHO = new SpearmanRHO(beta, sampleAge)
-spearmanRHO.calc()
-  .then(value => console.log(value))
-  .catch(err => console.error(err));
+console.log(Math.round(output[0]*100))
