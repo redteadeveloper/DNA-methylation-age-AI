@@ -14,7 +14,7 @@ var s1 = fs.createReadStream('../../json/GSE40279_betas.json')
             const spearmanRHO = new SpearmanRHO(beta, sampleAge)
             spearmanRHO.calc()
                 .then(value => {
-                    fs.appendFile('GSE40279_betas_spearman', `\t"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}": ${value},\n`, function (err) {
+                    fs.appendFile('GSE40279_betas_spearman.json', `\t"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}": ${value},\n`, function (err) {
                         if (err) console.log(err)
                     })
                 })
@@ -24,7 +24,7 @@ var s1 = fs.createReadStream('../../json/GSE40279_betas.json')
     })
         .on('error', function (err) { console.log('Error:', err) })
         .on('end', function () {
-            fs.appendFile('GSE40279_betas_spearman', '}', function (err) { if (err) console.log(err) })
+            fs.appendFile('GSE40279_betas_spearman.json', '}', function (err) { if (err) console.log(err) })
             console.log("done")
         })
     )
