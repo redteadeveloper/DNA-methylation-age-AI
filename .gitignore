@@ -129,9 +129,9 @@ dist
 *.docx
 *.pdf
 *.txt
-*.json
 
 GSE40279/
 GSE72775/
 
 json/
+test/*.json
