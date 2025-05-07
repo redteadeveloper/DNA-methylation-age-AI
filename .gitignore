@@ -133,5 +133,5 @@ dist
 GSE40279/
 GSE72775/
 
-json/
+json/*.json
 test/*.json
