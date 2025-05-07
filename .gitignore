@@ -135,4 +135,5 @@ GSE72775/
 
 json/*.json
 test/*.json
-js/ai/model/
+js/ai/model_beta/
+js/ai/model_mvalue/
