@@ -13,7 +13,7 @@ var s1 = fs.createReadStream('../../json/GSE40279_betas_spearman.json')
         s1.pause()
         if (line.toString().trim().startsWith("\"cg") && !line.toString().includes('e-')) {
             let coefficient = line.slice(12).match(/-?0.[0-9]+/g).map((x) => parseFloat(x))
-            if (coefficient > 0.5) {
+            if (coefficient > 0.557) {
                 list1.push(`"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}"`)
                 fs.appendFile('GSE40279_betas_high_coef.json', `\t${line.toString().trim()}\n`, function (err) {
                     if (err) console.log(err)
@@ -36,7 +36,7 @@ var s2 = fs.createReadStream('../../json/GSE40279_mvalues_spearman.json')
         s2.pause()
         if (line.toString().trim().startsWith("\"cg") && !line.toString().includes('e-')) {
             let coefficient = line.slice(12).match(/-?0.[0-9]+/g).map((x) => parseFloat(x))
-            if (coefficient > 0.5) {
+            if (coefficient > 0.557) {
                 list2.push(`"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}"`)
                 fs.appendFile('GSE40279_mvalues_high_coef.json', `\t${line.toString().trim()}\n`, function (err) {
                     if (err) console.log(err)

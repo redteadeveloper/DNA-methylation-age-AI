@@ -9,7 +9,7 @@ const intersection = (a1 = [], a2 = []) => {
 var sites1 = []
 var sites2 = []
 
-var s1 = fs.createReadStream('../GSE40279/GSE40279_series_matrix.txt')
+var s1 = fs.createReadStream('../../GSE40279/GSE40279_series_matrix.txt')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s1.pause()
@@ -22,9 +22,9 @@ var s1 = fs.createReadStream('../GSE40279/GSE40279_series_matrix.txt')
             console.log('Error:', err)
         })
         .on('end', function () {
-            console.log('Finish reading.')
+            console.log('Finished reading.')
 
-            var s2 = fs.createReadStream('../GSE72775/GSE72775_datBetaNormalized.csv')
+            var s2 = fs.createReadStream('../../GSE72775/GSE72775_datBetaNormalized.csv')
                 .pipe(es.split())
                 .pipe(es.mapSync(function (line) {
                     s2.pause()
@@ -37,10 +37,10 @@ var s1 = fs.createReadStream('../GSE40279/GSE40279_series_matrix.txt')
                         console.log('Error:', err)
                     })
                     .on('end', function () {
-                        console.log('Finish reading.')
+                        console.log('Finished reading.')
 
-                        console.log(sites1.length)
-                        console.log(sites2.length)
+                        console.log("GSE40279: " + sites1.length)
+                        console.log("GSE72775: " + sites2.length)
                         console.log(intersection(sites1, sites2).length)
 
                         fs.writeFile("result.txt", intersection(sites1, sites2).toString(), err => {
