@@ -4,7 +4,7 @@ const sampleAge = JSON.parse(fs.readFileSync('../../json/GSE40279_samples.json')
 
 const config = {
     binaryThresh: 0.5,
-    hiddenLayers: [10, 10],
+    hiddenLayers: [7, 7],
     activation: 'sigmoid',
     leakyReluAlpha: 0.01,
 }
@@ -17,7 +17,7 @@ for (let n of ns) {
     for (let site in sites) {
         let data = []
         let beta = sites[site]
-        console.log(`Training ${site} of n = ${n}`)
+        console.log(`Training ${site} of n=${n}`)
         for (var x in beta) {
             if (sampleAge[x > 100]) continue
             data.push({ input: [beta[x]], output: [sampleAge[x] / 100] })
