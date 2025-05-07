@@ -7,7 +7,7 @@ let data = []
 
 const config = {
     binaryThresh: 0.5,
-    hiddenLayers: [5], 
+    hiddenLayers: [10, 10], 
     activation: 'sigmoid', 
     leakyReluAlpha: 0.01, 
 }
@@ -19,6 +19,13 @@ for (var x in beta) {
 
 const net = new brain.NeuralNetwork(config)
 net.train(data)
+
+net.toJSON()
+
+fs.writeFile("model.json", JSON.stringify(net.toJSON()), err => {
+    if (err) throw err;
+    console.log('File successfully written to disk');
+})
 
 let output = net.run([0.5])
 

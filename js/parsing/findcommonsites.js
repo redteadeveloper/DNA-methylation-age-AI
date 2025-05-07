@@ -43,12 +43,11 @@ var s1 = fs.createReadStream('../../GSE40279/GSE40279_series_matrix.txt')
                         console.log("GSE72775: " + sites2.length)
                         console.log(intersection(sites1, sites2).length)
 
-                        fs.writeFile("result.txt", intersection(sites1, sites2).toString(), err => {
-                            if (err) throw err;
-                            console.log('File successfully written to disk');
-                        })
+                        // fs.writeFile("result.txt", intersection(sites1, sites2).toString(), err => {
+                        //     if (err) throw err;
+                        //     console.log('File successfully written to disk');
+                        // })
                     })
                 )
-
         })
     )
