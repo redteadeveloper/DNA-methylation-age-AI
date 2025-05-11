@@ -1,6 +1,6 @@
 const fs = require('fs')
 const es = require('event-stream')
-const list = Object.keys(JSON.parse(fs.readFileSync('../../json/TRAIN_mvalues_high_coef.json'), 'utf8'))
+const list = Object.keys(JSON.parse(fs.readFileSync('../../json/raw/TRAIN_mvalues_high_coef.json'), 'utf8'))
 
 fs.appendFile('../../json/TRAIN_mvalues_high.json', '{\n', function (err) { if (err) console.log(err) })
 

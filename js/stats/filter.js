@@ -7,8 +7,8 @@ let list2 = []
 let trainFirstLine = true
 let testFirstLine = true
 
-fs.writeFileSync('../../json/TRAIN_betas_high_coef.json', '{')
-fs.writeFileSync('../../json/TRAIN_mvalues_high_coef.json', '{')
+fs.writeFileSync('../../json/raw/TRAIN_betas_high_coef.json', '{')
+fs.writeFileSync('../../json/raw/TRAIN_mvalues_high_coef.json', '{')
 
 var s1 = fs.createReadStream('../../json/raw/TRAIN_betas_spearman.json')
     .pipe(es.split())
@@ -18,7 +18,7 @@ var s1 = fs.createReadStream('../../json/raw/TRAIN_betas_spearman.json')
             let coefficient = line.slice(12).match(/-?0.[0-9]+/g).map((x) => parseFloat(x))
             if (Math.abs(coefficient) > 0.612) {
                 list1.push(`"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}"`)
-                fs.appendFileSync('../../json/TRAIN_betas_high_coef.json', `${trainFirstLine ? "" : ","}\n\t${line.toString().trim().slice(0, -1)}`)
+                fs.appendFileSync('../../json/raw/TRAIN_betas_high_coef.json', `${trainFirstLine ? "" : ","}\n\t${line.toString().trim().slice(0, -1)}`)
                 trainFirstLine = false
             }
         }
@@ -26,10 +26,8 @@ var s1 = fs.createReadStream('../../json/raw/TRAIN_betas_spearman.json')
     })
         .on('error', function (err) { console.log('Error:', err) })
         .on('end', function () {
-            fs.appendFileSync('../../json/TRAIN_betas_high_coef.json', '\n}')
+            fs.appendFileSync('../../json/raw/TRAIN_betas_high_coef.json', '\n}')
             console.log("Done betas")
-            let obj = JSON.parse(fs.readFileSync('../../json/TRAIN_betas_high_coef.json', 'utf-8'))
-            console.log(Object.keys(obj).sort((a, b) => Math.abs(obj[b]) - Math.abs(obj[a])))
         })
     )
 
@@ -41,7 +39,7 @@ var s2 = fs.createReadStream('../../json/raw/TRAIN_mvalues_spearman.json')
             let coefficient = line.slice(12).match(/-?0.[0-9]+/g).map((x) => parseFloat(x))
             if (Math.abs(coefficient) > 0.612) {
                 list2.push(`"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}"`)
-                fs.appendFileSync('../../json/TRAIN_mvalues_high_coef.json', `${testFirstLine ? "" : ","}\n\t${line.toString().trim().slice(0, -1)}`)
+                fs.appendFileSync('../../json/raw/TRAIN_mvalues_high_coef.json', `${testFirstLine ? "" : ","}\n\t${line.toString().trim().slice(0, -1)}`)
                 testFirstLine = false
             }
         }
@@ -49,9 +47,9 @@ var s2 = fs.createReadStream('../../json/raw/TRAIN_mvalues_spearman.json')
     })
         .on('error', function (err) { console.log('Error:', err) })
         .on('end', function () {
-            fs.appendFileSync('../../json/TRAIN_mvalues_high_coef.json', '\n}')
+            fs.appendFileSync('../../json/raw/TRAIN_mvalues_high_coef.json', '\n}')
             console.log("Done mvalues")
-            let obj = JSON.parse(fs.readFileSync('../../json/TRAIN_mvalues_high_coef.json', 'utf-8'))
-            console.log(Object.keys(obj).sort((a, b) => Math.abs(obj[b]) - Math.abs(obj[a])))
+            let obj = JSON.parse(fs.readFileSync('../../json/raw/TRAIN_mvalues_high_coef.json', 'utf-8'))
+            fs.writeFileSync('../../json/sites.json', JSON.stringify(Object.keys(obj).sort((a, b) => Math.abs(obj[b]) - Math.abs(obj[a]))))
         })
     )
