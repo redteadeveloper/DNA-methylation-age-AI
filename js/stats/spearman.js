@@ -3,8 +3,8 @@ const es = require('event-stream')
 const SpearmanRHO = require('spearman-rho')
 const sampleAge = JSON.parse(fs.readFileSync('../../json/TRAIN_samples.json'), 'utf8').map(n => parseInt(n[0]))
 
-const betasJSONLocation = '../../json/TRAIN_betas_spearman.json'
-const mvaluesJSONLocation = '../../json/TRAIN_mvalues_spearman.json'
+const betasJSONLocation = '../../json/raw/TRAIN_betas_spearman.json'
+const mvaluesJSONLocation = '../../json/raw/TRAIN_mvalues_spearman.json'
 
 let betasFirstLine = true
 let mvaluesFirstLine = true
@@ -15,7 +15,7 @@ let mvaluesCount = 0
 fs.writeFileSync(betasJSONLocation, '{')
 fs.writeFileSync(mvaluesJSONLocation, '{')
 
-var s1 = fs.createReadStream('../../json/TRAIN_betas.json')
+var s1 = fs.createReadStream('../../json/raw/TRAIN_betas.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s1.pause()
@@ -39,7 +39,7 @@ var s1 = fs.createReadStream('../../json/TRAIN_betas.json')
         })
     )
 
-var s2 = fs.createReadStream('../../json/TRAIN_mvalues.json')
+var s2 = fs.createReadStream('../../json/raw/TRAIN_mvalues.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s2.pause()

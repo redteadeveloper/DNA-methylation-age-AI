@@ -1,8 +1,8 @@
 const fs = require('fs')
 const es = require('event-stream')
 
-const trainJSONLocation = '../../json/TRAIN_betas.json'
-const testJSONLocation = '../../json/TEST_betas.json'
+const trainJSONLocation = '../../json/raw/TRAIN_betas.json'
+const testJSONLocation = '../../json/raw/TEST_betas.json'
 
 let trainFirstLine = true
 let testFirstLine = true

@@ -14,8 +14,8 @@ var floatToString = function (flt) {
     return fStr
 }
 
-const trainJSONLocation = '../../json/TRAIN_mvalues.json'
-const testJSONLocation = '../../json/TEST_mvalues.json'
+const trainJSONLocation = '../../json/raw/TRAIN_mvalues.json'
+const testJSONLocation = '../../json/raw/TEST_mvalues.json'
 
 let trainFirstLine = true
 let testFirstLine = true
@@ -27,7 +27,7 @@ fs.writeFileSync(trainJSONLocation, '{')
 fs.writeFileSync(testJSONLocation, '{')
 
 // TRAIN data
-var s1 = fs.createReadStream('../../json/TRAIN_betas.json')
+var s1 = fs.createReadStream('../../json/raw/TRAIN_betas.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s1.pause()
@@ -67,7 +67,7 @@ var s1 = fs.createReadStream('../../json/TRAIN_betas.json')
     )
 
 // TEST data
-var s2 = fs.createReadStream('../../json/TEST_betas.json')
+var s2 = fs.createReadStream('../../json/raw/TEST_betas.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s2.pause()

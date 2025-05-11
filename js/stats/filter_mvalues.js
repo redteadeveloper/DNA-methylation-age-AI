@@ -1,10 +1,10 @@
 const fs = require('fs')
 const es = require('event-stream')
-const list = JSON.parse(fs.readFileSync('../../json/TRAIN_mvalues_high_coef.json'), 'utf8').keys()
+const list = Object.keys(JSON.parse(fs.readFileSync('../../json/TRAIN_mvalues_high_coef.json'), 'utf8'))
 
 fs.appendFile('../../json/TRAIN_mvalues_high.json', '{\n', function (err) { if (err) console.log(err) })
 
-var s1 = fs.createReadStream('../../json/TRAIN_mvalues.json')
+var s1 = fs.createReadStream('../../json/raw/TRAIN_mvalues.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s1.pause()
