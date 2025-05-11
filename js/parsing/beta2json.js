@@ -67,6 +67,6 @@ var s2 = fs.createReadStream('../../GSE72775/GSE72775_datBetaNormalized.csv')
         .on('error', function (err) { console.log('Error:', err) })
         .on('end', function () {
             fs.appendFileSync(testJSONLocation, '\n}')
-            console.log(`Done parsing ${testCount} TRAIN data`)
+            console.log(`Done parsing ${testCount} TEST data`)
         })
     )

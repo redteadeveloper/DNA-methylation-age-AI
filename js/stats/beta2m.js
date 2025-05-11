@@ -89,7 +89,7 @@ var s2 = fs.createReadStream('../../json/TEST_betas.json')
                     let m = Math.log2(x / (1 - x))
                     if (m > 8) return '1'
                     else if (m < -8) return '0'
-                    else return floatToString(((m + 8) / 16).toFixed(7))
+                    else return floatToString(((m + 8) / 16).toFixed(10))
                 }
             })
 
