@@ -1,6 +1,6 @@
 const fs = require('fs')
 const brain = require('brain.js')
-const sampleAge = JSON.parse(fs.readFileSync('../../json/GSE40279_samples.json'), 'utf8').map(n => parseInt(n[0]))
+const sampleAge = JSON.parse(fs.readFileSync('../../json/TRAIN_samples.json'), 'utf8').map(n => parseInt(n[0]))
 
 const config = {
     binaryThresh: 0.5,
@@ -13,7 +13,7 @@ let ns = [50]
 
 for (let n of ns) {
     console.log(`Starting training n=${n}`)
-    const sites = JSON.parse(fs.readFileSync(`../../json/n=${n}/GSE40279_betas_high (${n}).json`, 'utf8'))
+    const sites = JSON.parse(fs.readFileSync(`../../json/n=${n}/TRAIN_betas_high (${n}).json`, 'utf8'))
     for (let site in sites) {
         let data = []
         let beta = sites[site]

@@ -1,11 +1,11 @@
 const fs = require('fs')
 const es = require('event-stream')
 const SpearmanRHO = require('spearman-rho')
-const sampleAge = JSON.parse(fs.readFileSync('../../json/GSE40279_samples.json'), 'utf8').map(n => parseInt(n[0]))
+const sampleAge = JSON.parse(fs.readFileSync('../../json/TRAIN_samples.json'), 'utf8').map(n => parseInt(n[0]))
 
-fs.appendFile('GSE40279_mvalues_spearman.json', '{\n', function (err) { if (err) console.log(err) })
+fs.appendFile('../../json/TRAIN_mvalues_spearman.json', '{\n', function (err) { if (err) console.log(err) })
 
-var s1 = fs.createReadStream('../../json/GSE40279_mvalues.json')
+var s1 = fs.createReadStream('../../json/TRAIN_mvalues.json')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
         s1.pause()
@@ -14,7 +14,7 @@ var s1 = fs.createReadStream('../../json/GSE40279_mvalues.json')
             const spearmanRHO = new SpearmanRHO(m, sampleAge)
             spearmanRHO.calc()
                 .then(value => {
-                    fs.appendFile('GSE40279_mvalues_spearman.json', `\t"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}": ${value},\n`, function (err) {
+                    fs.appendFile('../../json/TRAIN_mvalues_spearman.json', `\t"${line.toString().trim().slice(0, 12).replaceAll("\"", "")}": ${value},\n`, function (err) {
                         if (err) console.log(err)
                     })
                 })
@@ -24,7 +24,7 @@ var s1 = fs.createReadStream('../../json/GSE40279_mvalues.json')
     })
         .on('error', function (err) { console.log('Error:', err) })
         .on('end', function () {
-            fs.appendFile('GSE40279_mvalues_spearman.json', '}', function (err) { if (err) console.log(err) })
+            fs.appendFile('../../json/TRAIN_mvalues_spearman.json', '}', function (err) { if (err) console.log(err) })
             console.log("done")
         })
     )

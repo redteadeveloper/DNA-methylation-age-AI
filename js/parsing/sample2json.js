@@ -11,6 +11,7 @@ var lines2 = []
 var obj1 = []
 var obj2 = []
 
+// TRAIN data
 var s1 = fs.createReadStream('../../GSE40279/GSE40279_samples.txt')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
@@ -23,14 +24,15 @@ var s1 = fs.createReadStream('../../GSE40279/GSE40279_samples.txt')
             for (let i1 in lines1[0]) {
                 obj1.push([parseText(lines1[0][i1]), parseText(lines1[1][i1]), parseText(lines1[2][i1])])
             }
-            console.log(obj1)
-            fs.writeFile("GSE40279_samples.json", JSON.stringify(obj1), err => {
-                if (err) throw err;
-                console.log('File successfully written to disk');
+
+            fs.writeFile("../../json/TRAIN_samples.json", JSON.stringify(obj1), err => {
+                if (err) throw err
+                console.log(`Done parsing TRAIN samples: ${obj1.length} samples`)
             })
         })
     )
 
+// TEST data
 var s2 = fs.createReadStream('../../GSE72775/GSE72775_samples.txt')
     .pipe(es.split())
     .pipe(es.mapSync(function (line) {
@@ -43,10 +45,10 @@ var s2 = fs.createReadStream('../../GSE72775/GSE72775_samples.txt')
             for (let i2 in lines2[0]) {
                 obj2.push([parseText(lines2[1][i2]), parseText(lines2[0][i2]), parseText(lines2[2][i2])])
             }
-            console.log(obj2)
-            fs.writeFile("GSE72775_samples.json", JSON.stringify(obj2), err => {
-                if (err) throw err;
-                console.log('File successfully written to disk');
+
+            fs.writeFile("../../json/TEST_samples.json", JSON.stringify(obj2), err => {
+                if (err) throw err
+                console.log(`Done parsing TEST samples: ${obj2.length} samples`)
             })
         })
     )

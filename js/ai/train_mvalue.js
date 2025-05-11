@@ -1,6 +1,6 @@
 const fs = require('fs')
 const brain = require('brain.js')
-const sampleAge = JSON.parse(fs.readFileSync('../../json/GSE40279_samples.json'), 'utf8').map(n => parseInt(n[0]))
+const sampleAge = JSON.parse(fs.readFileSync('../../json/TRAIN_samples.json'), 'utf8').map(n => parseInt(n[0]))
 
 const config = {
     binaryThresh: 0.5,
@@ -9,11 +9,11 @@ const config = {
     leakyReluAlpha: 0.01,
 }
 
-let ns = [50]
+let ns = [10]
 
 for (let n of ns) {
     console.log(`Starting training n=${n}`)
-    const sites = JSON.parse(fs.readFileSync(`../../json/n=${n}/GSE40279_mvalues_high (${n}).json`, 'utf8'))
+    const sites = JSON.parse(fs.readFileSync(`../../json/n=${n}/TRAIN_mvalues_high (${n}).json`, 'utf8'))
     for (let site in sites) {
         let data = []
         let mvalue = sites[site]

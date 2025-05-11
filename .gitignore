@@ -134,6 +134,7 @@ GSE40279/
 GSE72775/
 
 json/*.json
+json/backup/
 test/*.json
 js/ai/model_beta/
 js/ai/model_mvalue/
