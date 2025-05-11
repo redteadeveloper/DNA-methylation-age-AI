@@ -7,12 +7,12 @@ var floatToString = function (flt) {
     if (rx.test(fStr)) {
         details = rx.exec(fStr)
         num = details[1]
-        cnt = parseInt(details[2], 10);
+        cnt = parseInt(details[2], 10)
         cnt += (num.replace(/\./g, "").length - 1)
         return flt.toFixed(cnt)
     }
     return fStr
-};
+}
 
 const trainJSONLocation = '../../json/TRAIN_mvalues.json'
 const testJSONLocation = '../../json/TEST_mvalues.json'
