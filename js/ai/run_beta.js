@@ -4,7 +4,7 @@ const testSampleAge = JSON.parse(fs.readFileSync('../../json/TEST_samples.json')
 
 console.log(testSampleAge.length)
 
-for (let n of [10, 20, 30, 40, 50]) {
+for (let n of [30]) {
     // console.log(`Running n=${n}...`)
     let totalError = 0
     const sites = JSON.parse(fs.readFileSync(`../../json/sites.json`, 'utf-8')).slice(0, n)
