@@ -4,28 +4,29 @@ const sampleAge = JSON.parse(fs.readFileSync('../../json/TRAIN_samples.json'), '
 
 const config = {
     binaryThresh: 0.5,
-    hiddenLayers: [7, 7],
+    hiddenLayers: [10, 10, 5],
     activation: 'sigmoid',
     leakyReluAlpha: 0.01,
 }
 
-let ns = [10]
-
-for (let n of ns) {
+for (let n of [10, 20, 30, 40, 50]) {
     console.log(`Starting training n=${n}`)
-    const sites = JSON.parse(fs.readFileSync(`../../json/n=${n}/TRAIN_mvalues_high (${n}).json`, 'utf8'))
-    for (let site in sites) {
-        let data = []
-        let mvalue = sites[site]
-        console.log(`Training ${site} of n=${n}`)
-        for (var x in mvalue) {
-            if (sampleAge[x > 100]) continue
-            data.push({ input: [mvalue[x]], output: [sampleAge[x] / 100] })
-        }
-        const net = new brain.NeuralNetwork(config)
-        net.train(data)
-        fs.appendFileSync(`./model_mvalue/n=${n}/${site}.json`, '')
-        fs.writeFileSync(`./model_mvalue/n=${n}/${site}.json`, JSON.stringify(net.toJSON()))
+    const sites = JSON.parse(fs.readFileSync(`../../json/sites.json`, 'utf-8')).slice(0, n)
+    const mvalues = JSON.parse(fs.readFileSync(`../../json/TRAIN_mvalues_high.json`, 'utf-8'))
+
+    let data = []
+
+    for (let i = 0; i < sampleAge.length; i++) {
+        let obj = {}
+        
+        for (const site of sites) obj[site] = mvalues[site][i]
+        data.push({ input: obj, output: { age: sampleAge[i] / 100 }})
+        // console.log(`Created data for sample ${i+1}`)
     }
+
+    const net = new brain.NeuralNetwork(config)
+    net.train(data)
+
+    fs.writeFileSync(`./model/mvalue_n=${n}.json`, JSON.stringify(net.toJSON()))
     console.log(`Done training n=${n}`)
 }

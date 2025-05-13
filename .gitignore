@@ -137,5 +137,5 @@ json/*.json
 json/backup/
 json/raw/
 test/*.json
-js/ai/model_beta/
-js/ai/model_mvalue/
+js/ai/backup/
+js/ai/model/
