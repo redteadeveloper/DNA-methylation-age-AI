@@ -129,6 +129,7 @@ dist
 *.docx
 *.pdf
 *.txt
+*.png
 
 GSE40279/
 GSE72775/
@@ -137,5 +138,5 @@ json/*.json
 json/backup/
 json/raw/
 test/*.json
-js/ai/backup/
-js/ai/model/
+script/ai/backup/
+script/ai/model/

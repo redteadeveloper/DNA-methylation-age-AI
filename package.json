@@ -2,6 +2,7 @@
   "dependencies": {
     "brain.js": "^2.0.0-beta.24",
     "event-stream": "^4.0.1",
+    "r-integration": "^2.4.0",
     "spearman-rho": "^1.0.6"
   }
 }
